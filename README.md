@@ -3,21 +3,24 @@
 In 2010, Google introduced MapReduce, a batch-processing framework for running computations involving large data volume over a commodity cluster. MapReduce was later adopted by several companies including Google, Amazon, IBM etc. It solved the scalability issues to great extent when dealing with large datasets and showed good performance, provided that the recipes for data processing do not involve any repeatative processing of a single step. The reason for this was that MapReduce reads data at the begining of a step and the scope of the objects holding this data are upto the end of this step. So the data objects are destoyed once a step ends. As a result, repeating a step incurs significant parallelism overhead. 
 
 Spark was introduced to mainly overcome this limitation of MapReduce.Spark is a fast and memory-efficent clustering computing framework. It support both batch-style as well as computations over data streams. It provides high-level APIs in Scala, Java, Python, and R. It also provides an optimized engine that supports general computation graphs for data analysis and a machine learning library. Support for running on YARN (Hadoop NextGen) was added to Spark in version 0.6.0. You can learn more about this <a href="https://spark.apache.org/docs/latest/index.html">here</a> and <a href="https://en.wikipedia.org/wiki/Apache_Spark">here</a> 
-
+<p align="justify">
 In this tutorial, we are going to show you how to setup a spark cluster in distributed mode using a cluster of machine running Linux. For simplicity, we are going to setup a cluster of two nodes only. 
-
+</p>
+<p align="justify">
 Here we describe a simple guide of how to make a heterogenous Spark cluster for custom built Python3.6 on SuSE Leap 42 linux. For cluster we will use two computers: 4-cores ‘quad’ with 4Gb RAM and 2-cores ‘duo’, also with 4Gb memory. The ‘quad’ is Alex’s workstation (${USER}=alex) and ‘duo’ is Neelam’s workstation (have ${USER}=neelam). In our setup, duo will be master because it has the same memory but less cores and quad will be the slave.
-
+</p>
 Stage I. Build custom python3.6
 Python compilation and installation (into user’s home directory) 
 I.1. Download and unpack python3.6 
 I.2. Compile and install python
-
-CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \
---with-system-expat --with-system-ffi --with-ensurepip=install \
---enable-optimizations --enable-loadable-sqlite-extensions=yes
-make -j 2 && make test && make install
-
+<body>
+  <p>
+CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \<\br>
+--with-system-expat --with-system-ffi --with-ensurepip=install \ <\br>
+--enable-optimizations --enable-loadable-sqlite-extensions=yes <\br>
+make -j 2 && make test && make install 
+  </p>
+</body>
 I.3. Register the libraries.
 Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then sudo ldconfig
 

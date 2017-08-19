@@ -25,13 +25,19 @@ make -j 2 && make test && make install
 '''
 
 I.3. Register the libraries.
+
+'''
 Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then sudo ldconfig
+'''
 
 I.4. Create python environment file ~/python.bashrc :
+
+'''
 unset PYTHONSTARTUP
 export PATH="/home/${USER}/local/bin/:${PATH}"
 export PYTHONHOME="/home/${USER}/local/"
 export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
+'''
 
 Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
 

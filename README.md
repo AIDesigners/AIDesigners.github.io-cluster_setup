@@ -67,7 +67,11 @@ TCP="4040 7077 7078 8080 8081 18080 22221 22222"</i></code></pre>
 # space separated list of allowed TCP ports
 TCP="7077 7078 8080 8081"</i></code></pre>
 
-<p>II.6. Reboot both computers to apply the settings</p>
+<p>II.6. Setup hduser's .bashrc</p>
+<pre><code><i>source '/home/${USER}/python.bashrc'
+export PYTHONPATH=${PYTHONPATH}:/home/hduser/spark-2.2.0/python/</i></code></pre>
+
+<p>II.7. Reboot both computers to apply the settings</p>
 
 ### Stage III. Installing Spark under hduser
 

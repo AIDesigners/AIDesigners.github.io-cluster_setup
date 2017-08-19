@@ -121,14 +121,14 @@ spark.history.ui.port             18080
 spark.driver.port                 22221
 spark.blockManager.port           22222</i></code></pre>
 
-<p>III.4.. Run cluster (from duo) and check it state at duo:8080</p>
-<p><i>/home/neelam/spark-2.2.0/sbin/start-all.sh</i></p>
+<p>III.4.. Run cluster (from duo) and check its state at duo:8080</p>
+<p><i>/home/hduser/spark-2.2.0/sbin/start-all.sh</i></p>
 
 <p>III.5. Run a test job over the cluster (from duo)</p>
 <p><i>/home/hduser/spark-2.2.0/bin/spark-submit --master spark://duo:7077 examples/src/main/python/pi.py 1000</i></p>
 
 <p>III.6. (Optional) stop the cluster</p>
-<p><i>/home/neelam/spark-2.2.0/sbin/stop-all.sh</i></p>
+<p><i>/home/hduser/spark-2.2.0/sbin/stop-all.sh</i></p>
 <p><br></p>
 <p><br></p>
 

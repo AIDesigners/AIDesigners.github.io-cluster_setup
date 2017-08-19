@@ -23,7 +23,7 @@ CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \
 --enable-optimizations --enable-loadable-sqlite-extensions=yes 
 make -j 2 && make test && make install
 ```
-</i>
+<\i>
 <p>I.3. Register the libraries.
 <p>Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then <i>sudo ldconfig</i></p>
 

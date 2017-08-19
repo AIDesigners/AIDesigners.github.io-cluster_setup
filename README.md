@@ -70,6 +70,7 @@ TCP="7077 7078 8080 8081"</i></code></pre>
 
 <p>II.6. Reboot both computers to apply the settings</p>
 
+
 ### Stage III. Installing Spark under hduser
 
 <p>III.1. Download and unpack Spark-2.2.0</p> 

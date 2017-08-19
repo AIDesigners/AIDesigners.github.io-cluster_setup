@@ -28,7 +28,6 @@ make -j 2 && make test && make install
 
 <p>I.4. Create python environment file ~/python.bashrc :</p>
 <i>
-
 ```markdown
 unset PYTHONSTARTUP
 export PATH="/home/${USER}/local/bin/:${PATH}"

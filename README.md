@@ -130,8 +130,8 @@ spark.blockManager.port           22222</i></code></pre>
 
 <p>III.6. (Optional) stop the cluster</p>
 <p><i>/home/neelam/spark-2.2.0/sbin/stop-all.sh</i></p>
-
-
+<p></p>
+<p></p>
 
 
 

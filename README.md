@@ -10,7 +10,7 @@ Spark was introduced to mainly overcome this limitation of MapReduce.Spark is a 
 In this tutorial, we are going to show you how to setup a spark cluster in distributed mode using a cluster of machine running Linux. For simplicity, we are going to setup a cluster of two nodes only. 
 </p>
 <p align="justify">
-Here we describe a simple guide of how to make a heterogenous Spark cluster for custom built Python3.6 on SuSE Leap 42 linux. For cluster we will use two computers: 4-cores ‘quad’ with 4Gb RAM and 2-cores ‘duo’, also with 4Gb memory. The ‘quad’ is Alex’s workstation (${USER}=alex) and ‘duo’ is Neelam’s workstation (have ${USER}=neelam). In our setup, duo will be master because it has the same memory but less cores and quad will be the slave.
+Here we describe a simple guide of how to make a heterogenous Spark cluster for custom built Python3.6 on SuSE Leap 42 linux. For cluster we will use two computers: 4-cores ‘quad’ with 4Gb RAM and 2-cores ‘duo’, also with 4Gb memory. The ‘quad’ is Alex’s workstation (${USER}=alex) and ‘duo’ is Neelam’s workstation (have ${USER}=neelam). In our setup, duo will be master because it has the same memory but less cores and quad will be the slave. The ratio beyond this is to reserve the same amount of RAM per core (896m) and have some extra memory for cluster administration stuff at the master node.
 </p>
 
 ### Stage I. Build custom python3.6
@@ -89,7 +89,7 @@ SPARK_WORKER_MEMORY=1792m
 SPARK_WORKER_PORT=7077
 SPARK_WORKER_WEBUI_PORT=8081
 SPARK_WORKER_DIR=/tmp/
-SPARK_DAEMON_MEMORY=256m
+SPARK_DAEMON_MEMORY=128m
 PYSPARK_PYTHON=/home/neelam/local/bin/python3.6</i></code></pre>
 
 <p>/home/hduser/spark-2.2.0/conf/slaves</p>

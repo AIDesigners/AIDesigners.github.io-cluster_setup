@@ -16,14 +16,14 @@ Stage I. Build custom python3.6
 Python compilation and installation (into user’s home directory) 
 I.1. Download and unpack python3.6 
 I.2. Compile and install python
-<body>
-  <p>
+
+'''
 CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \<br>
 --with-system-expat --with-system-ffi --with-ensurepip=install \<br>
 --enable-optimizations --enable-loadable-sqlite-extensions=yes <br>
 make -j 2 && make test && make install 
-  </p>
-</body>
+'''
+
 I.3. Register the libraries.
 Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then sudo ldconfig
 

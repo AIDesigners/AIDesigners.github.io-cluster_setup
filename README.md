@@ -5,7 +5,7 @@ In 2010, Google introduced MapReduce, a batch-processing framework for running c
 </p>
 <p align="justify">
 Spark was introduced to mainly overcome this limitation of MapReduce.Spark is a fast and memory-efficent clustering computing framework. It support both batch-style as well as computations over data streams. It provides high-level APIs in Scala, Java, Python, and R. It also provides an optimized engine that supports general computation graphs for data analysis and a machine learning library. Support for running on YARN (Hadoop NextGen) was added to Spark in version 0.6.0. You can learn more about this <a href="https://spark.apache.org/docs/latest/index.html">here</a> and <a href="https://en.wikipedia.org/wiki/Apache_Spark">here</a> 
-</p>>
+</p>
 <p align="justify">
 In this tutorial, we are going to show you how to setup a spark cluster in distributed mode using a cluster of machine running Linux. For simplicity, we are going to setup a cluster of two nodes only. 
 </p>
@@ -23,10 +23,10 @@ CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \
 --enable-optimizations --enable-loadable-sqlite-extensions=yes 
 make -j 2 && make test && make install
 ```<\i>
-<p>I.3. Register the libraries.
+<p>I.3. Register the libraries.</p>
 <p>Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then <i>sudo ldconfig</i></p>
 
-<p>I.4. Create python environment file ~/python.bashrc : </p>
+<p>I.4. Create python environment file ~/python.bashrc :</p>
 <i>
 ```markdown
 unset PYTHONSTARTUP
@@ -35,7 +35,7 @@ export PYTHONHOME="/home/${USER}/local/"
 export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
 ```<\i>
 
-Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
+<p>Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)</p>
 
 II.1. Add user 
 sudo useradd -d hduser

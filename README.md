@@ -34,6 +34,7 @@ export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER
 </i></code></pre>
 
 ### Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
+
 ### Stage III. Installing Spark under hduser
 
 <p>II.1. Add user</p> 

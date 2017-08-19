@@ -1,8 +1,11 @@
 ## Spark Cluster Setup
 
+<p align="justify">
 In 2010, Google introduced MapReduce, a batch-processing framework for running computations involving large data volume over a commodity cluster. MapReduce was later adopted by several companies including Google, Amazon, IBM etc. It solved the scalability issues to great extent when dealing with large datasets and showed good performance, provided that the recipes for data processing do not involve any repeatative processing of a single step. The reason for this was that MapReduce reads data at the begining of a step and the scope of the objects holding this data are upto the end of this step. So the data objects are destoyed once a step ends. As a result, repeating a step incurs significant parallelism overhead. 
-
+</p>
+<p align="justify">
 Spark was introduced to mainly overcome this limitation of MapReduce.Spark is a fast and memory-efficent clustering computing framework. It support both batch-style as well as computations over data streams. It provides high-level APIs in Scala, Java, Python, and R. It also provides an optimized engine that supports general computation graphs for data analysis and a machine learning library. Support for running on YARN (Hadoop NextGen) was added to Spark in version 0.6.0. You can learn more about this <a href="https://spark.apache.org/docs/latest/index.html">here</a> and <a href="https://en.wikipedia.org/wiki/Apache_Spark">here</a> 
+</p>>
 <p align="justify">
 In this tutorial, we are going to show you how to setup a spark cluster in distributed mode using a cluster of machine running Linux. For simplicity, we are going to setup a cluster of two nodes only. 
 </p>

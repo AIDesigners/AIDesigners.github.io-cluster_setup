@@ -16,7 +16,7 @@ Here we describe a simple guide of how to make a heterogenous Spark cluster for 
 <p>Python compilation and installation (into user’s home directory)</p> 
 <p>I.1. Download and unpack python3.6</p> 
 <p>I.2. Compile and install python</p>
-```markdown
+```
 _{CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \ }_
 _--with-system-expat --with-system-ffi --with-ensurepip=install \ _
 _--enable-optimizations --enable-loadable-sqlite-extensions=yes _

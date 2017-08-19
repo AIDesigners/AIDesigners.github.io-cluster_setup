@@ -47,7 +47,6 @@ export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER
 
 <p>II.4. Allow authentification at both computers</p>
 <p><i>cat .ssh/id_rsa.pub >> .ssh/authorized_keys</i></p> 
-### Stage III. Installing Spark under hduser
 
 <p>II.5. Open firewall parts</p>
 <p>II.5.a) at duo</p>
@@ -69,7 +68,6 @@ TCP="4040 7077 7078 8080 8081 18080 22221 22222"</i></code></pre>
 TCP="7077 7078 8080 8081"</i></code></pre>
 
 <p>II.6. Reboot both computers to apply the settings</p>
-
 
 ### Stage III. Installing Spark under hduser
 

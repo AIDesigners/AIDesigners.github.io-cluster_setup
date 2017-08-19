@@ -12,32 +12,24 @@ In this tutorial, we are going to show you how to setup a spark cluster in distr
 <p align="justify">
 Here we describe a simple guide of how to make a heterogenous Spark cluster for custom built Python3.6 on SuSE Leap 42 linux. For cluster we will use two computers: 4-cores ‘quad’ with 4Gb RAM and 2-cores ‘duo’, also with 4Gb memory. The ‘quad’ is Alex’s workstation (${USER}=alex) and ‘duo’ is Neelam’s workstation (have ${USER}=neelam). In our setup, duo will be master because it has the same memory but less cores and quad will be the slave.
 </p>
-Stage I. Build custom python3.6
-Python compilation and installation (into user’s home directory) 
-I.1. Download and unpack python3.6 
-I.2. Compile and install python
-
-```
-CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \<br>
---with-system-expat --with-system-ffi --with-ensurepip=install \<br>
---enable-optimizations --enable-loadable-sqlite-extensions=yes <br>
-make -j 2 && make test && make install 
-```
-
-I.3. Register the libraries.
-
-```
-Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then sudo ldconfig
-```
+<p>Stage I. Build custom python3.6</p>
+<p>Python compilation and installation (into user’s home directory)</p> 
+<p>I.1. Download and unpack python3.6</p> 
+<p>I.2. Compile and install python</p>
+```markdown
+_CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \ _
+_--with-system-expat --with-system-ffi --with-ensurepip=install \ _
+_--enable-optimizations --enable-loadable-sqlite-extensions=yes _
+_make -j 2 && make test && make install_
+```  
+<p>I.3. Register the libraries.
+<p>Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then <i>sudo ldconfig</i></p>
 
 I.4. Create python environment file ~/python.bashrc :
-
-```
 unset PYTHONSTARTUP
 export PATH="/home/${USER}/local/bin/:${PATH}"
 export PYTHONHOME="/home/${USER}/local/"
 export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
-```
 
 Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
 

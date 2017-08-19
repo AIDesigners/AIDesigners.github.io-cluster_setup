@@ -35,19 +35,15 @@ export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER
 
 ### Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
 
-### Stage III. Installing Spark under hduser
-
 <p>II.1. Add user</p> 
 <p><i>sudo useradd -d hduser</i></p>
 
 <p>II.2. Add password</p>
 <p><i>sudo passwd hduser</i></p>
-### Stage III. Installing Spark under hduser
 
-<p>II.3. Create identification key for password-less ssh<p>
+<p>II.3. Create identification key for password-less ssh</p>
 <p><i>ssh-keygen -t rsa</i></p>
 <p>and put the same .ssh/id_rsa.pub into .ssh/id_rsa.pub at each machine</p>
-### Stage III. Installing Spark under hduser
 
 <p>II.4. Allow authentification at both computers</p>
 <p><i>cat .ssh/id_rsa.pub >> .ssh/authorized_keys</i></p> 

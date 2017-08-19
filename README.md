@@ -12,7 +12,9 @@ In this tutorial, we are going to show you how to setup a spark cluster in distr
 <p align="justify">
 Here we describe a simple guide of how to make a heterogenous Spark cluster for custom built Python3.6 on SuSE Leap 42 linux. For cluster we will use two computers: 4-cores ‘quad’ with 4Gb RAM and 2-cores ‘duo’, also with 4Gb memory. The ‘quad’ is Alex’s workstation (${USER}=alex) and ‘duo’ is Neelam’s workstation (have ${USER}=neelam). In our setup, duo will be master because it has the same memory but less cores and quad will be the slave.
 </p>
-<p>Stage I. Build custom python3.6</p>
+
+### Stage I. Build custom python3.6
+
 <p>Python compilation and installation (into user’s home directory)</p> 
 <p>I.1. Download and unpack python3.6</p> 
 <p>I.2. Compile and install python</p>
@@ -31,7 +33,7 @@ export PYTHONHOME="/home/${USER}/local/"
 export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
 </i></code></pre>
 
-<p>Stage II. Create a dummy ‘<b>hduser</b>’ on both machines to run the cluster on his behalf (this require a reboot)</p>
+### Stage II. Create a dummy ‘<b>hduser</b>’ on both machines to run the cluster on his behalf (this require a reboot)
 
 <p>II.1. Add user</p> 
 <p><i>sudo useradd -d hduser</i></p>
@@ -66,15 +68,16 @@ TCP="7077 7078 8080 8081"</i></code></pre>
 
 <p>II.6. Reboot both computers to apply the settings</p>
 
-Stage III. Installing Spark under hduser
-III.1. Download and unpack Spark-2.2.0 
-III.2. Build Spark
-./dev/make-distribution.sh --name yspark --pip --tgz -Phive -Phive-thriftserver
+### Stage III. Installing Spark under hduser
 
-III.3. Configure cluster
-III.3.a) at duo:
-/home/hduser/spark-2.2.0/conf/spark-defaults.conf
-SPARK_MASTER_HOST=duo
+<p>III.1. Download and unpack Spark-2.2.0</p> 
+<p>III.2. Build Spark</p>
+<p><i>./dev/make-distribution.sh --name yspark --pip --tgz -Phive -Phive-thriftserver </i></p>
+
+<p>III.3. Configure cluster</p>
+<p>III.3.a) at duo:</p>
+<p>/home/hduser/spark-2.2.0/conf/spark-defaults.conf</p>
+<pre><code><i>SPARK_MASTER_HOST=duo
 SPARK_MASTER_PORT=7077
 SPARK_MASTER_WEBUI_PORT=8080
 SPARK_WORKER_CORES=2
@@ -83,21 +86,21 @@ SPARK_WORKER_PORT=7077
 SPARK_WORKER_WEBUI_PORT=8081
 SPARK_WORKER_DIR=/tmp/
 SPARK_DAEMON_MEMORY=256m
-PYSPARK_PYTHON=/home/neelam/local/bin/python3.6
+PYSPARK_PYTHON=/home/neelam/local/bin/python3.6</i></code></pre>
 
-/home/hduser/spark-2.2.0/conf/slaves
-duo
-quad
+<p>/home/hduser/spark-2.2.0/conf/slaves</p>
+<pre><code><i>duo
+quad</i></code></pre>
 
-/home/hduser/spark-2.2.0/conf/spark-defaults.conf
-spark.ui.port                     4040
+<p>/home/hduser/spark-2.2.0/conf/spark-defaults.conf</p>
+<pre><code><i>spark.ui.port                     4040
 spark.history.ui.port             18080
 spark.driver.port                 22221
-spark.blockManager.port           22222
+spark.blockManager.port           22222</i></code></pre>
 
-III.3.a) at quad:
-/home/hduser/spark-2.2.0/conf/spark-defaults.conf
-SPARK_MASTER_HOST=duo
+<p>III.3.a) at quad:</p>
+<p>/home/hduser/spark-2.2.0/conf/spark-defaults.conf</p>
+<pre><code><i>SPARK_MASTER_HOST=duo
 SPARK_MASTER_PORT=7077
 SPARK_MASTER_WEBUI_PORT=8080
 SPARK_WORKER_CORES=4
@@ -106,22 +109,22 @@ SPARK_WORKER_PORT=7078
 SPARK_WORKER_WEBUI_PORT=8081
 SPARK_WORKER_DIR=/tmp/
 SPARK_DAEMON_MEMORY=128m
-PYSPARK_PYTHON=/home/alex/local/bin/python3.6
+PYSPARK_PYTHON=/home/alex/local/bin/python3.6</i></code></pre>
 
-/home/hduser/spark-2.2.0/conf/spark-defaults.conf
-spark.ui.port                     4040
+<p>/home/hduser/spark-2.2.0/conf/spark-defaults.conf</p>
+<pre><code><i>spark.ui.port                     4040
 spark.history.ui.port             18080
 spark.driver.port                 22221
-spark.blockManager.port           22222
+spark.blockManager.port           22222</i></code></pre>
 
-III.4.. Run cluster (from duo) and check it state at duo:8080
-/home/neelam/spark-2.2.0/sbin/start-all.sh
+<p>III.4.. Run cluster (from duo) and check it state at duo:8080</p>
+<p><i>/home/neelam/spark-2.2.0/sbin/start-all.sh</i></p>
 
-III.5. Run a test job over the cluster (from duo) 
-/home/hduser/spark-2.2.0/bin/spark-submit --master spark://duo:7077 examples/src/main/python/pi.py 1000
+<p>III.5. Run a test job over the cluster (from duo)</p>
+<p><i>/home/hduser/spark-2.2.0/bin/spark-submit --master spark://duo:7077 examples/src/main/python/pi.py 1000</i></p>
 
-III.6. (Optional) stop the cluster
-/home/neelam/spark-2.2.0/sbin/stop-all.sh
+<p>III.6. (Optional) stop the cluster</p>
+<p><i>/home/neelam/spark-2.2.0/sbin/stop-all.sh</i></p>
 
 
 

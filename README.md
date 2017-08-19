@@ -33,7 +33,7 @@ export PYTHONHOME="/home/${USER}/local/"
 export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
 </i></code></pre>
 
-### Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
+### Stage II. Create a dummy ‘<b>hduser</b>’ on both machines to run the cluster on his behalf (this require a reboot)
 
 <p>II.1. Add user</p> 
 <p><i>sudo useradd -d hduser</i></p>
@@ -73,7 +73,7 @@ export PYTHONPATH=${PYTHONPATH}:/home/hduser/spark-2.2.0/python/</i></code></pre
 
 <p>II.7. Reboot both computers to apply the settings</p>
 
-### Stage III. Installing Spark under hduser
+### Stage III. Installing Spark under <b>hduser</b>
 
 <p>III.1. Download and unpack Spark-2.2.0</p> 
 <p>III.2. Build Spark</p>

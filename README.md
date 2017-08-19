@@ -18,9 +18,9 @@ I.1. Download and unpack python3.6
 I.2. Compile and install python
 <body>
   <p>
-CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \<\br>
---with-system-expat --with-system-ffi --with-ensurepip=install \ <\br>
---enable-optimizations --enable-loadable-sqlite-extensions=yes <\br>
+CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \<br>
+--with-system-expat --with-system-ffi --with-ensurepip=install \<br>
+--enable-optimizations --enable-loadable-sqlite-extensions=yes <br>
 make -j 2 && make test && make install 
   </p>
 </body>

@@ -31,40 +31,40 @@ export PYTHONHOME="/home/${USER}/local/"
 export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
 </i></code></pre>
 
-<p>Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)</p>
+<p>Stage II. Create a dummy ‘<b>hduser</b>’ on both machines to run the cluster on his behalf (this require a reboot)</p>
 
-II.1. Add user 
-sudo useradd -d hduser
+<p>II.1. Add user</p> 
+<p><i>sudo useradd -d hduser</i></p>
 
-II.2. Add password
-sudo passwd hduser
+<p>II.2. Add password</p>
+<p><i>sudo passwd hduser</i></p>
 
-II.3. Create identification key for password-less ssh
-ssh-keygen -t rsa
-and put the same .ssh/id_rsa.pub into .ssh/id_rsa.pub at each machine
+<p>II.3. Create identification key for password-less ssh<p>
+<p><i>ssh-keygen -t rsa</i></p>
+<p>and put the same .ssh/id_rsa.pub into .ssh/id_rsa.pub at each machine</p>
 
-II.4. Allow authentification at both computers
-cat .ssh/id_rsa.pub >> .ssh/authorized_keys 
-II.5. Open firewall parts
-II.5.a) at duo
-edit file /etc/sysconfig/SuSEfirewall2
-FW_CONFIGURATIONS_EXT="nfs-client sshd Spark"
-create file /etc/sysconfig/SuSEfirewall2.d/services/Spark
-## Name: Spark
+<p>II.4. Allow authentification at both computers</p>
+<p><i>cat .ssh/id_rsa.pub >> .ssh/authorized_keys</i></p> 
+<p>II.5. Open firewall parts</p>
+<p>II.5.a) at duo</p>
+<p>edit file /etc/sysconfig/SuSEfirewall2</p>
+<p><i>FW_CONFIGURATIONS_EXT="nfs-client sshd Spark"</i></p>
+<p>create file /etc/sysconfig/SuSEfirewall2.d/services/Spark</p>
+<pre><code><i>## Name: Spark
 ## Description: Open ports for Spark
 # space separated list of allowed TCP ports
-TCP="4040 7077 7078 8080 8081 18080 22221 22222"
+TCP="4040 7077 7078 8080 8081 18080 22221 22222"</i></code></pre>
 
-II.5.b) at quad
-edit file /etc/sysconfig/SuSEfirewall2
-FW_CONFIGURATIONS_EXT="nfs-client sshd Spark"
-create file /etc/sysconfig/SuSEfirewall2.d/services/Spark
-## Name: Spark
+<p>II.5.b) at quad</p>
+<p>edit file /etc/sysconfig/SuSEfirewall2</p>
+<p><i>FW_CONFIGURATIONS_EXT="nfs-client sshd Spark"</i></p>
+<p>create file /etc/sysconfig/SuSEfirewall2.d/services/Spark</p>
+<pre><code><i>## Name: Spark
 ## Description: Open ports for Spark
 # space separated list of allowed TCP ports
-TCP="7077 7078 8080 8081"
+TCP="7077 7078 8080 8081"</i></code></pre>
 
-II.6. Reboot both computers to apply the settings
+<p>II.6. Reboot both computers to apply the settings</p>
 
 Stage III. Installing Spark under hduser
 III.1. Download and unpack Spark-2.2.0 

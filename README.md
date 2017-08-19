@@ -18,7 +18,6 @@ Here we describe a simple guide of how to make a heterogenous Spark cluster for 
 <p>Python compilation and installation (into user’s home directory)</p> 
 <p>I.1. Download and unpack python3.6</p> 
 <p>I.2. Compile and install python</p>
-
 <pre><code><i>CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared --with-system-expat --with-system-ffi --with-ensurepip=install --enable-optimizations --enable-loadable-sqlite-extensions=yes 
 make -j 2 && make test && make install
 </i></code></pre>
@@ -77,7 +76,7 @@ export PYTHONPATH=${PYTHONPATH}:/home/hduser/spark-2.2.0/python/</i></code></pre
 
 <p>III.1. Download and unpack Spark-2.2.0</p> 
 <p>III.2. Build Spark</p>
-<p><i>./dev/make-distribution.sh --name yspark --pip --tgz -Phive -Phive-thriftserver </i></p>
+<p><i>/home/hduser/spark-2.2.0/dev/make-distribution.sh --name yspark --pip --tgz -Phive -Phive-thriftserver </i></p>
 
 <p>III.3. Configure cluster</p>
 <p>III.3.a) at duo:</p>

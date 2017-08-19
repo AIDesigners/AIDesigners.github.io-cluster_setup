@@ -6,7 +6,124 @@ Spark was introduced to mainly overcome this limitation of MapReduce.Spark is a 
 
 In this tutorial, we are going to show you how to setup a spark cluster in distributed mode using a cluster of machine running Linux. For simplicity, we are going to setup a cluster of two nodes only. 
 
-1. First, we need to  
+Here we describe a simple guide of how to make a heterogenous Spark cluster for custom built Python3.6 on SuSE Leap 42 linux. For cluster we will use two computers: 4-cores ‘quad’ with 4Gb RAM and 2-cores ‘duo’, also with 4Gb memory. The ‘quad’ is Alex’s workstation (${USER}=alex) and ‘duo’ is Neelam’s workstation (have ${USER}=neelam). In our setup, duo will be master because it has the same memory but less cores and quad will be the slave.
+
+Stage I. Build custom python3.6
+Python compilation and installation (into user’s home directory) 
+I.1. Download and unpack python3.6 
+I.2. Compile and install python
+
+CXX="/usr/bin/g++" ./configure --prefix=/home/${USER}/local/ --enable-shared \
+--with-system-expat --with-system-ffi --with-ensurepip=install \
+--enable-optimizations --enable-loadable-sqlite-extensions=yes
+make -j 2 && make test && make install
+
+I.3. Register the libraries.
+Add /home/${USER}/local/lib and /home/${USER}/local/lib64 into /etc/ld.so.cache and then sudo ldconfig
+
+I.4. Create python environment file ~/python.bashrc :
+unset PYTHONSTARTUP
+export PATH="/home/${USER}/local/bin/:${PATH}"
+export PYTHONHOME="/home/${USER}/local/"
+export PYTHONPATH="/home/${USER}/local/lib/python3.6/site-packages/:/home/${USER}/local/lib64/python3.6/lib-dynload/"
+
+Stage II. Create a dummy ‘hduser’ on both machines to run the cluster on his behalf (this require a reboot)
+
+II.1. Add user 
+sudo useradd -d hduser
+
+II.2. Add password
+sudo passwd hduser
+
+II.3. Create identification key for password-less ssh
+ssh-keygen -t rsa
+and put the same .ssh/id_rsa.pub into .ssh/id_rsa.pub at each machine
+
+II.4. Allow authentification at both computers
+cat .ssh/id_rsa.pub >> .ssh/authorized_keys 
+II.5. Open firewall parts
+II.5.a) at duo
+edit file /etc/sysconfig/SuSEfirewall2
+FW_CONFIGURATIONS_EXT="nfs-client sshd Spark"
+create file /etc/sysconfig/SuSEfirewall2.d/services/Spark
+## Name: Spark
+## Description: Open ports for Spark
+# space separated list of allowed TCP ports
+TCP="4040 7077 7078 8080 8081 18080 22221 22222"
+
+II.5.b) at quad
+edit file /etc/sysconfig/SuSEfirewall2
+FW_CONFIGURATIONS_EXT="nfs-client sshd Spark"
+create file /etc/sysconfig/SuSEfirewall2.d/services/Spark
+## Name: Spark
+## Description: Open ports for Spark
+# space separated list of allowed TCP ports
+TCP="7077 7078 8080 8081"
+
+II.6. Reboot both computers to apply the settings
+
+Stage III. Installing Spark under hduser
+III.1. Download and unpack Spark-2.2.0 
+III.2. Build Spark
+./dev/make-distribution.sh --name yspark --pip --tgz -Phive -Phive-thriftserver
+
+III.3. Configure cluster
+III.3.a) at duo:
+/home/hduser/spark-2.2.0/conf/spark-defaults.conf
+SPARK_MASTER_HOST=duo
+SPARK_MASTER_PORT=7077
+SPARK_MASTER_WEBUI_PORT=8080
+SPARK_WORKER_CORES=2
+SPARK_WORKER_MEMORY=1792m
+SPARK_WORKER_PORT=7077
+SPARK_WORKER_WEBUI_PORT=8081
+SPARK_WORKER_DIR=/tmp/
+SPARK_DAEMON_MEMORY=256m
+PYSPARK_PYTHON=/home/neelam/local/bin/python3.6
+
+/home/hduser/spark-2.2.0/conf/slaves
+duo
+quad
+
+/home/hduser/spark-2.2.0/conf/spark-defaults.conf
+spark.ui.port                     4040
+spark.history.ui.port             18080
+spark.driver.port                 22221
+spark.blockManager.port           22222
+
+III.3.a) at quad:
+/home/hduser/spark-2.2.0/conf/spark-defaults.conf
+SPARK_MASTER_HOST=duo
+SPARK_MASTER_PORT=7077
+SPARK_MASTER_WEBUI_PORT=8080
+SPARK_WORKER_CORES=4
+SPARK_WORKER_MEMORY=3584m
+SPARK_WORKER_PORT=7078
+SPARK_WORKER_WEBUI_PORT=8081
+SPARK_WORKER_DIR=/tmp/
+SPARK_DAEMON_MEMORY=128m
+PYSPARK_PYTHON=/home/alex/local/bin/python3.6
+
+/home/hduser/spark-2.2.0/conf/spark-defaults.conf
+spark.ui.port                     4040
+spark.history.ui.port             18080
+spark.driver.port                 22221
+spark.blockManager.port           22222
+
+III.4.. Run cluster (from duo) and check it state at duo:8080
+/home/neelam/spark-2.2.0/sbin/start-all.sh
+
+III.5. Run a test job over the cluster (from duo) 
+/home/hduser/spark-2.2.0/bin/spark-submit --master spark://duo:7077 examples/src/main/python/pi.py 1000
+
+III.6. (Optional) stop the cluster
+/home/neelam/spark-2.2.0/sbin/stop-all.sh
+
+
+
+
+
+
 
 You can use the [editor on GitHub](https://github.com/AIDesigners/AIDesigners.github.io-cluster_setup/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
 
